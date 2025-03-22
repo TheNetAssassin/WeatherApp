@@ -1,0 +1,94 @@
+<%- include('partials/header.ejs') %>
+
+<div class="main">
+
+<!-- Left side for date and displaying temp and description -->
+   <div class="weather-side">
+     <!-- Div to display date and location -->
+        <div class="weather-gradient"></div>
+        <div class="date-container">
+            <h2 class="date-dayname"><%= day %>
+             <span class="date-day"><%= fulldate %></span>
+             </h2> 
+             <i class="fa-solid fa-location-dot"></i>
+              <p class="location"><%= weather.city  %></p>
+       </div>
+
+     <!-- Div to display weather temp and description -->
+        <div class="weather-container">
+          <img class="todayicon" src=<%= weather.icon %> alt="Today-icon">
+        <h2 class="weather-temp"><%= weather.temp  %> &deg;<%= btn === "on" ? "F" : "C" %></h2>
+        <h3 class="weather-desc"><%= weather.desc  %></h3>
+        <form action="/unit" method="post">
+        <div class="form-check form-switch togglebtn">
+            <input class="form-check-input checkbox" type="checkbox" onchange="this.form.submit()" role="switch" name="btn" id="flexSwitchCheckDefault" <%= btn === "on" ? "checked" : null %> >
+            <label class="form-check-label" for="flexSwitchCheckDefault"><span class="clabel">&deg;C</span><span class="flabel">&deg;F</span</label>
+          </div>
+        </form>
+        </div>
+    </div>
+
+<!-- Right side container for displaying other weather data and input to change location -->
+
+    <div class="info-side">
+<!-- Div to show precipitation humidity and wind -->
+        <div class="today-info-container">
+            <div class="today-info">
+                <div class="precipitation">
+                    <span class="title">PRESSURE</span>
+                    <span class="value"><%= weather.pressure %> hPa</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="humidity">
+                    <span class="title">HUMIDITY</span>
+                    <span class="value"><%= weather.humidity  %> %</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="wind">
+                    <span class="title">WIND</span>
+                    <span class="value"><%= weather.wind  %> km/h</span>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+<!-- Div to show current week temp -->
+		<div class="week-container">
+            <ul class="week-list">
+                <li>
+                    <img class="weather-icon" src=<%= weeklist.day1icon %> alt="icon">          
+                    <span class="day-name"><%= weeklist.day1day %></span>
+                    <span class="day-temp"><%= weeklist.day1temp %>&deg;</span>
+                </li>
+                <li>
+                    <img class="weather-icon" src=<%= weeklist.day2icon %> alt="icon">          
+                    <span class="day-name"><%= weeklist.day2day %></span>
+                    <span class="day-temp"><%= weeklist.day2temp %>&deg;</span>
+                </li>
+                <li>
+                    <img class="weather-icon" src=<%= weeklist.day3icon %> alt="icon">          
+                    <span class="day-name"><%= weeklist.day3day %></span>
+                    <span class="day-temp"><%= weeklist.day3temp %>&deg;</span>
+                </li>
+                <li>
+                    <img class="weather-icon" src=<%= weeklist.day4icon %> alt="icon">          
+                    <span class="day-name"><%= weeklist.day4day %></span>
+                    <span class="day-temp"><%= weeklist.day4temp %>&deg;</span>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+ <!-- Div to allow the user to change location with form element -->
+        <div class="location-container">
+            <form method="post" action="/">
+            <input class="inputcity" type="input" placeholder="Enter the location" name="cityName" />
+            <button class="location-button">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Show Weather</span>
+            </button>
+        </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') %>
